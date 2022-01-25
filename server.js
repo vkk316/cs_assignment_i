@@ -3,7 +3,7 @@ var net = require('net');
 var HOST = '127.0.0.1';
 var PORT = 6969;
 
-var ans = Math.floor(Math.random() * 10);
+var ans = Math.floor(Math.random() * 32);
 
 var socks = [];
 
@@ -18,7 +18,7 @@ net.createServer(function (sock) {
         }
         else if(data + "" == ans + ""){
             socks.forEach((e)=> e.write('' + sock.remotePort)) //broadcast WINNER ID
-            ans = Math.floor(Math.random() * 10);
+            ans = Math.floor(Math.random() * 32);
         }else if(data + "" == "hey boi"){
             sock.write("noop")
         }else{

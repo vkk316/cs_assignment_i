@@ -19,10 +19,10 @@ client.on('data', function (data) {
     if(data.toString().startsWith("you're ")){
         console.log(''+data);
         myID = parseInt(data.toString().slice(7))
-        client.write(Math.floor(Math.random() * 10) + "") // first trial
+        client.write(Math.floor(Math.random() * 32) + "") // first trial
     }
     else if(data+"" == "noop"){
-        client.write(Math.floor(Math.random() * 10) + "") // n trial
+        client.write(Math.floor(Math.random() * 32) + "") // n trial
     }else if(data.toString().match(/^[0-9]+$/) != null){
         if(parseInt(data+"") == myID){
             console.log("YOU WIN")
