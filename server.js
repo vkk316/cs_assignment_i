@@ -13,8 +13,11 @@ net.createServer(function (sock) {
     console.log(socks.length)
     sock.on('data', function (data) {
         console.log('DATA ' + sock.remoteAddress + ': ' + data);
-        if(data + "" == ans + ""){
-            socks.forEach((e)=> e.write('the winner is ' + sock.remotePort))
+        if(data+"" == "hi"){
+            sock.write("you're " + sock.remotePort)
+        }
+        else if(data + "" == ans + ""){
+            socks.forEach((e)=> e.write('' + sock.remotePort)) //broadcast WINNER ID
             ans = Math.floor(Math.random() * 10);
         }else if(data + "" == "hey boi"){
             sock.write("noop")
