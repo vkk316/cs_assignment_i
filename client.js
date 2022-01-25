@@ -1,29 +1,31 @@
-var net = require('net');
+var net = require("net");
 
-var HOST = '127.0.0.1';
+var HOST = "127.0.0.1";
 var PORT = 6969;
 
 var client = new net.Socket();
 client.connect(PORT, HOST, function () {
-
-    console.log('CONNECTED TO: ' + HOST + ':' + PORT);
-    // Write a message to the socket as soon as the client is connected,
-    //the server will receive it as message from the client 
-    client.write('6');
-
+  console.log("CONNECTED TO: " + HOST + ":" + PORT);
+  // Write a message to the socket as soon as the client is connected,
+  //the server will receive it as message from the client
+  client.write("I am "+process.argv[2]);
 });
 
 // Add a 'data' event handler for the client socket
 // data is what the server sent to this socket
-client.on('data', function (data) {
-
-    console.log('DATA: ' + data);
-    // Close the client socket completely
-    //client.destroy();
-
+client.on("data", function (data) {
+  if (data.toString().startsWith("here you go,")) {
+    setInterval(function () {
+      client.write(Math.floor(Math.random() * 100).toString());
+    }, 100);
+    if (data.toString == "Yes") {
+      client.destroy();
+    }
+  }
+  console.log("DATA: " + data);
 });
 
 // Add a 'close' event handler for the client socket
-client.on('close', function () {
-    console.log('Connection closed');
+client.on("close", function () {
+  console.log("Connection closed");
 });
